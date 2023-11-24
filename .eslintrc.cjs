@@ -1,31 +1,59 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "plugin:react/recommended",
-        "standard-with-typescript",
-        "plugin:react-hooks/recommended",
-        "plugin:prettier/recommended"
+  root: true,
+  env: {
+    browser: true,
+    es2021: true
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs','tailwind.config.js'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react', 'react-refresh','import','prettier', 'react-hooks', '@typescript-eslint'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
     ],
-    "overrides": [
+    "prettier/prettier": [
+      "warn",
+      {
+        "printWidth": 100,
+        "trailingComma": "all",
+        "tabWidth": 2,
+        "semi": true,
+        "singleQuote": false,
+        "bracketSpacing": false,
+        "arrowParens": "always",
+        "endOfLine":"auto"
+      }
     ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": './tsconfig.json',
-    },
-    "plugins": [
-        "react",
-        "prettier",
-        "react-hooks",
-        "@typescript-eslint"
+    "import/order": ["warn", {
+      "groups": ["type", "builtin", "object", "external", "internal", "parent", "sibling", "index"],
+      "pathGroups": [{
+        "pattern": "~/**",
+        "group": "external",
+        "position": "after"
+      }],
+      "newlines-between": "always"
+    }],
+    "react/self-closing-comp": "warn",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
     ],
-    "rules": {
-        "prettier/prettier": "error",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "react/react-in-jsx-scope": "off",
-        "eslintimport/no-absolute-path": "off"
-    }
-}
+    "padding-line-between-statements": [
+      "warn",
+      {"blankLine": "always", "prev": "*", "next": "return"},
+      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+      {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+    ]
+  }
+};
